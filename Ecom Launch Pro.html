@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcomLaunch Pro - Launch & Scale Your E-Commerce Brand</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        .logo-text span {
+            color: #f97316;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3b82f6;
+        }
+
+        .contact-btn {
+            background: #3b82f6;
+            color: white !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #1e40af;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            left: -100%;
+            top: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 5rem 2rem 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu ul {
+            flex-direction: column;
+            gap: 0;
+            align-items: flex-start;
+        }
+
+        .mobile-menu ul li {
+            width: 100%;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .mobile-menu ul li a {
+            display: block;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            color: #1e293b;
+        }
+
+        .mobile-menu .contact-btn {
+            margin-top: 1rem;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 .gradient-text {
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: underline;
+            text-decoration-color: #3b82f6;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 8px;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .badges {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-icon {
+            width: 24px;
+            height: 24px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #3b82f6;
+            padding: 1rem 2rem;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+
+        .hero-note::before {
+            content: "✓";
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 0.8s ease;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .roi-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .roi-badge-icon {
+            width: 40px;
+            height: 40px;
+            background: #22c55e;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-badge h3 {
+            font-size: 2rem;
+            color: #1e293b;
+        }
+
+        .roi-badge p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .support-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+
+        .support-badge h3 {
+            font-size: 1.5rem;
+            color: #3b82f6;
+        }
+
+        .support-badge p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:nth-child(1) {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+        .service-card:nth-child(1):hover {
+            background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card:nth-child(2) {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        }
+        .service-card:nth-child(2):hover {
+            background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card:nth-child(3) {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+        }
+        .service-card:nth-child(3):hover {
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card:nth-child(4) {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        }
+        .service-card:nth-child(4):hover {
+            background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card:nth-child(5) {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+        .service-card:nth-child(5):hover {
+            background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card:nth-child(6) {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde047 100%);
+        }
+        .service-card:nth-child(6):hover {
+            background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 35px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .service-card p {
+            color: #475569;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-choose-image {
+            animation: fadeInLeft 0.8s ease;
+        }
+
+        .why-choose-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .why-choose-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .why-choose-content > p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-item:nth-child(1) .feature-icon { background: #dbeafe; color: #3b82f6; }
+        .feature-item:nth-child(2) .feature-icon { background: #dcfce7; color: #22c55e; }
+        .feature-item:nth-child(3) .feature-icon { background: #fef3c7; color: #f59e0b; }
+        .feature-item:nth-child(4) .feature-icon { background: #f3e8ff; color: #a855f7; }
+
+        .feature-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .feature-text p {
+            color: #64748b;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            overflow: hidden;
+        }
+
+        .testimonial-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .testimonial-card:nth-child(2) .quote-icon { background: #22c55e; }
+        .testimonial-card:nth-child(3) .quote-icon { background: #f97316; }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-card:nth-child(1) .author-avatar { background: #3b82f6; }
+        .testimonial-card:nth-child(2) .author-avatar { background: #22c55e; }
+        .testimonial-card:nth-child(3) .author-avatar { background: #f97316; }
+
+        .author-info h4 {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .process-steps::before {
+            content: "";
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #f59e0b, #22c55e, #a855f7);
+            z-index: 0;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .process-step:nth-child(1) .step-icon { background: #3b82f6; }
+        .process-step:nth-child(2) .step-icon { background: #f59e0b; }
+        .process-step:nth-child(3) .step-icon { background: #22c55e; }
+        .process-step:nth-child(4) .step-icon { background: #a855f7; }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 35px;
+            height: 35px;
+            background: #fbbf24;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+            border: 3px solid white;
+        }
+
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .process-step p {
+            color: #64748b;
+            font-size: 0.95rem;
+            padding: 0 1rem;
+        }
+
+        .process-cta {
+            background: #3b82f6;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .process-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .process-cta .btn-primary {
+            background: white;
+            color: #3b82f6;
+        }
+
+        .process-cta .btn-primary:hover {
+            background: #f1f5f9;
+        }
+
+        .process-cta small {
+            display: block;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Results Section */
+        .results {
+            padding: 5rem 5%;
+            background: #1e293b;
+            color: white;
+        }
+
+        .results-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .results-header {
+            position: relative;
+        }
+
+        .results-badge {
+            display: inline-block;
+            background: #fbbf24;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+
+        .results-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-card:nth-child(1) h3 {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-card:nth-child(2) h3 {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-card:nth-child(3) h3 {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-card:nth-child(4) h3 {
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .results-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: #1e293b;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+        }
+
+        .results-image {
+            position: relative;
+        }
+
+        .results-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .clients-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .clients-badge h3 {
+            font-size: 1.5rem;
+        }
+
+        .clients-badge p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .contact-info > p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-method-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .contact-method:nth-child(1) .contact-method-icon { background: #3b82f6; }
+        .contact-method:nth-child(2) .contact-method-icon { background: #25d366; }
+        .contact-method:nth-child(3) .contact-method-icon { background: #22c55e; }
+
+        .contact-method-text h3 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            color: #1e293b;
+        }
+
+        .contact-method-text p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .contact-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-stat {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .contact-stat h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-stat:nth-child(1) h3 { color: #3b82f6; }
+        .contact-stat:nth-child(2) h3 { color: #22c55e; }
+        .contact-stat:nth-child(3) h3 { color: #fbbf24; }
+        .contact-stat:nth-child(4) h3 { color: #f97316; }
+
+        .contact-stat p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #3b82f6;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .social-link:hover {
+            background: #3b82f6;
+            transform: translateY(-3px);
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section a::before {
+            content: "✓";
+            color: #22c55e;
+        }
+
+        .footer-section.get-in-touch a::before {
+            content: "📧";
+        }
+
+        .footer-section.get-in-touch li:nth-child(2) a::before {
+            content: "\f232";
+            font-family: "Font Awesome 6 Brands";
+            font-weight: 400;
+            color: #25d366;
+            font-size: 18px;
+        }
+
+        .footer-section.get-in-touch li:nth-child(3) a::before {
+            content: "☎️";
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            opacity: 0.6;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero, .why-choose, .results-content, .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            nav > ul {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 3rem 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .badges {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 0.9rem 1.5rem;
+            }
+
+            .roi-badge, .support-badge {
+                padding: 0.8rem 1rem;
+            }
+
+            .roi-badge h3, .support-badge h3 {
+                font-size: 1.5rem;
+            }
+
+            .services {
+                padding: 3rem 5%;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .services-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .service-card p {
+                font-size: 1rem;
+            }
+
+            .why-choose {
+                padding: 3rem 5%;
+            }
+
+            .why-choose-content h2 {
+                font-size: 2rem;
+            }
+
+            .why-choose-content > p {
+                font-size: 1rem;
+            }
+
+            .testimonials {
+                padding: 3rem 5%;
+            }
+
+            .testimonials-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .testimonial-card {
+                min-width: 85%;
+                scroll-snap-align: center;
+                flex-shrink: 0;
+            }
+
+            .process {
+                padding: 3rem 5%;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .process-step {
+                max-width: 300px;
+            }
+
+            .process-cta {
+                padding: 3rem 2rem;
+            }
+
+            .process-cta h2 {
+                font-size: 2rem;
+            }
+
+            .process-cta p {
+                font-size: 1rem;
+            }
+
+            .results {
+                padding: 3rem 5%;
+            }
+
+            .results-content {
+                gap: 2rem;
+            }
+
+            .results-header h2 {
+                font-size: 2rem;
+            }
+
+            .results-header p {
+                font-size: 1rem;
+            }
+
+            .stat-card h3 {
+                font-size: 2.5rem;
+            }
+
+            .stat-card p {
+                font-size: 1rem;
+            }
+
+            .results-buttons {
+                flex-direction: column;
+            }
+
+            .results-buttons .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact {
+                padding: 3rem 5%;
+            }
+
+            .contact-content {
+                gap: 2rem;
+            }
+
+            .contact-info h2 {
+                font-size: 2rem;
+            }
+
+            .contact-info > p {
+                font-size: 1rem;
+            }
+
+            .contact-method-text h3 {
+                font-size: 0.9rem;
+            }
+
+            .contact-method-text p {
+                font-size: 0.85rem;
+            }
+
+            .contact-stats {
+                padding: 1.5rem;
+            }
+
+            .contact-stat h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-stat p {
+                font-size: 0.85rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            footer {
+                padding: 3rem 5% 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.1rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 3%;
+            }
+
+            nav ul {
+                gap: 0.3rem;
+                font-size: 0.7rem;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+
+            .logo svg {
+                width: 35px;
+                height: 35px;
+            }
+
+            .contact-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-icon {
+                font-size: 30px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .testimonial-card {
+                min-width: 90%;
+                padding: 1.5rem;
+            }
+
+            .process-cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .stat-card h3 {
+                font-size: 2rem;
+            }
+
+            .contact-info h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            animation: float 3s ease-in-out infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Rocket/Arrow Shape -->
+                <path d="M60 10 L80 50 L95 45 L75 75 L80 95 L60 80 L40 95 L45 75 L25 45 L40 50 Z" fill="#1e40af"/>
+                <!-- Shopping Cart -->
+                <rect x="15" y="75" width="35" height="25" rx="3" fill="#1e40af"/>
+                <circle cx="25" cy="105" r="4" fill="#1e40af"/>
+                <circle cx="40" cy="105" r="4" fill="#1e40af"/>
+                <path d="M50 75 L55 65 L20 65 L25 75" fill="#1e40af"/>
+                <!-- Orange accent -->
+                <path d="M10 85 L25 95 L15 105 Z" fill="#f97316"/>
+            </svg>
+            <span class="logo-text">EcomLaunch<span>pro</span></span>
+        </div>
+        
+        <!-- Desktop Menu -->
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact" class="contact-btn">Contact Us</a></li>
+        </ul>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Drawer -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" class="mobile-menu-link">Home</a></li>
+            <li><a href="#services" class="mobile-menu-link">Services</a></li>
+            <li><a href="#testimonials" class="mobile-menu-link">Testimonials</a></li>
+            <li><a href="#about" class="mobile-menu-link">About</a></li>
+            <li><a href="#contact" class="contact-btn mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1><span class="gradient-text">Launch & Scale Your E-Commerce Brand to</span> <span class="highlight">7-Figures</span></h1>
+            <p>From zero to revenue-generating online stores with our proven system combining cutting-edge web design, high-converting ad campaigns, and data-driven growth strategies.</p>
+            
+            <div class="badges">
+                <div class="badge">
+                    <div class="badge-icon">✓</div>
+                    <span>ROI-Focused</span>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">✓</div>
+                    <span>Full Service Agency</span>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-primary">
+                    Get Your Free Strategy Session →
+                </a>
+                <a href="#services" class="btn-secondary">
+                    Explore Services →
+                </a>
+            </div>
+
+            <div class="hero-note">
+                Free consultation • No credit card required • Proven results
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop" alt="E-commerce Dashboard">
+            <div class="roi-badge">
+                <div class="roi-badge-icon"></div>
+                <h3>300%</h3>
+                <p>Avg. ROI</p>
+            </div>
+            <div class="support-badge">
+                <h3>24/7</h3>
+                <p>Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Complete E-Commerce Growth Solutions</h2>
+            <p>Everything you need to launch, grow, and scale your online store under one roof. No juggling multiple agencies.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3>E-Commerce Website Building</h3>
+                <p>Custom-built, conversion-optimized online stores designed to turn visitors into buyers. Mobile-responsive, fast-loading, and ready to scale.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Meta Ads (Facebook & Instagram)</h3>
+                <p>Reach your ideal customers where they spend their time. Strategic campaigns that drive qualified traffic and maximize ROAS.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3>Google Ads</h3>
+                <p>Capture high-intent buyers with Search, Display, and Shopping campaigns. Data-driven strategies that deliver measurable results.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">▶️</div>
+                <h3>YouTube Ads</h3>
+                <p>Engage audiences through compelling video content. Build brand awareness and drive conversions with targeted YouTube advertising.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>SEO (Organic Growth)</h3>
+                <p>Rank higher, get found easier. Our SEO strategies drive sustainable organic traffic and establish your brand authority.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>Growth Marketing & Scaling</h3>
+                <p>Strategic growth planning and execution. We help you scale profitably with data-driven insights and proven marketing frameworks.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="#contact" class="btn-primary">Start Your Growth Journey 🚀</a>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose" id="about">
+        <div class="why-choose-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop" alt="Growth Strategy">
+        </div>
+
+        <div class="why-choose-content">
+            <h2>Why Choose EcomLaunch Pro?</h2>
+            <p>We're not just another marketing agency. We're your growth partner, dedicated to turning your e-commerce vision into a profitable reality.</p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <h3>Data-Driven Strategies</h3>
+                        <p>Every decision backed by analytics and performance metrics. No guesswork, just proven results.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-text">
+                        <h3>Dedicated Growth Team</h3>
+                        <p>Work directly with experienced specialists who understand your business and goals inside-out.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">
+                        <h3>Rapid Implementation</h3>
+                        <p>Launch faster with our streamlined processes. From concept to live campaigns in record time.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-text">
+                        <h3>Continuous Optimization</h3>
+                        <p>We don't set and forget. Ongoing testing and refinement to maximize your ROI month after month.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#contact" class="btn-primary">Learn More About Us →</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>Real results from real businesses. Here's how we've helped e-commerce brands scale and succeed.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"EcomLaunch Pro transformed our online store completely. Within 3 months, we saw a 280% increase in revenue. Their Meta Ads strategy is simply phenomenal!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <h4>Aarav Singhania</h4>
+                        <p>Founder, Fashion Boutique</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"The team's expertise in Google Ads and SEO helped us rank #1 for our top keywords. Our organic traffic increased by 450% in just 6 months!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">VM</div>
+                    <div class="author-info">
+                        <h4>Vivaan Mehta</h4>
+                        <p>CEO, Tech Accessories Co.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"From website design to scaling our ads, EcomLaunch Pro handled everything. Our ROAS improved from 2.1x to 5.8x. Absolutely incredible results!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">IK</div>
+                    <div class="author-info">
+                        <h4>Ishaan Kapoor</h4>
+                        <p>Owner, Home Decor Store</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: #64748b;">Ready to write your own success story?</p>
+            <a href="#contact" class="btn-primary">Get Started Today →</a>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="section-header">
+            <h2>Our Proven Growth Process</h2>
+            <p>A systematic approach that transforms your e-commerce business from startup to industry leader</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-icon">
+                    <span class="step-number">1</span>
+                    💬
+                </div>
+                <h3>Discovery Call</h3>
+                <p>We learn about your business, goals, and challenges to create a tailored strategy.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-icon">
+                    <span class="step-number">2</span>
+                    📋
+                </div>
+                <h3>Strategy Blueprint</h3>
+                <p>Receive a comprehensive plan outlining exactly how we'll grow your business.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-icon">
+                    <span class="step-number">3</span>
+                    🚀
+                </div>
+                <h3>Launch & Execute</h3>
+                <p>We build your store, set up campaigns, and launch your growth engine.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-icon">
+                    <span class="step-number">4</span>
+                    📈
+                </div>
+                <h3>Scale & Optimize</h3>
+                <p>Continuous testing and optimization to maximize ROI and scale profitably.</p>
+            </div>
+        </div>
+
+        <div class="process-cta">
+            <h2>Ready to Launch Your Success Story?</h2>
+            <p>Book your free strategy session today and discover how we can transform your e-commerce business</p>
+            <a href="#contact" class="btn-primary">Get Your Free Consultation 📅</a>
+            <small>⏰ Limited slots available • Response within 24 hours</small>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results">
+        <div class="results-content">
+            <div class="results-header">
+                <span class="results-badge">OUR IMPACT</span>
+                <h2>Results That Speak for Themselves</h2>
+                <p>Our data-driven approach delivers measurable growth for e-commerce brands across every industry.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>300%</h3>
+                        <p>Average ROI Increase</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>2.5x</h3>
+                        <p>Revenue Growth</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>85%</h3>
+                        <p>Lower Cost Per Acquisition</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>24/7</h3>
+                        <p>Dedicated Support</p>
+                    </div>
+                </div>
+
+                <div class="results-buttons">
+                    <a href="#testimonials" class="btn-primary btn-white">View Success Stories →</a>
+                    <a href="https://wa.me/919211870426" class="btn-primary btn-whatsapp">Chat on WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="results-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop" alt="Analytics Dashboard">
+                <div class="clients-badge">
+                    <h3>100+</h3>
+                    <p>Happy Clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Ready to Scale Your E-Commerce Business?</h2>
+                <p>Let's discuss your goals and create a customized growth strategy. Fill out the form and we'll get back to you within 24 hours.</p>
+
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">✉️</div>
+                        <div class="contact-method-text">
+                            <h3>Email Us</h3>
+                            <p>Ecomlaunchpro@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-method-text">
+                            <h3>WhatsApp</h3>
+                            <p>+91 92118 70426</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📞</div>
+                        <div class="contact-method-text">
+                            <h3>Call Us</h3>
+                            <p>+91 92118 70426</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-stats">
+                    <div class="contact-stat">
+                        <h3>24/7</h3>
+                        <p>Support Available</p>
+                    </div>
+                    <div class="contact-stat">
+                        <h3>100+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="contact-stat">
+                        <h3>300%</h3>
+                        <p>Avg ROI Growth</p>
+                    </div>
+                    <div class="contact-stat">
+                        <h3>5★</h3>
+                        <p>Client Rating</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+91 12345 67890">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Service of Interest</label>
+                        <select>
+                            <option>Select a service</option>
+                            <option>E-Commerce Website Building</option>
+                            <option>Meta Ads (Facebook & Instagram)</option>
+                            <option>Google Ads</option>
+                            <option>YouTube Ads</option>
+                            <option>SEO & Organic Growth</option>
+                            <option>Growth Marketing & Scaling</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Message *</label>
+                        <textarea placeholder="Tell us about your business and goals..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Send Message ✈️
+                    </button>
+
+                    <p class="form-note">🔒 Your information is secure and will never be shared</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 60px; height: 60px;">
+                        <!-- Rocket/Arrow Shape -->
+                        <path d="M60 10 L80 50 L95 45 L75 75 L80 95 L60 80 L40 95 L45 75 L25 45 L40 50 Z" fill="#3b82f6"/>
+                        <!-- Shopping Cart -->
+                        <rect x="15" y="75" width="35" height="25" rx="3" fill="#3b82f6"/>
+                        <circle cx="25" cy="105" r="4" fill="#3b82f6"/>
+                        <circle cx="40" cy="105" r="4" fill="#3b82f6"/>
+                        <path d="M50 75 L55 65 L20 65 L25 75" fill="#3b82f6"/>
+                        <!-- Orange accent -->
+                        <path d="M10 85 L25 95 L15 105 Z" fill="#f97316"/>
+                    </svg>
+                    <span class="logo-text" style="color: white;">EcomLaunch<span>pro</span></span>
+                </div>
+                <p>Your complete e-commerce growth partner. From website building to scaling campaigns, we drive results that matter.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="#">E-Commerce Website Building</a></li>
+                    <li><a href="#">Meta Ads (Facebook & Instagram)</a></li>
+                    <li><a href="#">Google Ads</a></li>
+                    <li><a href="#">YouTube Ads</a></li>
+                    <li><a href="#">SEO & Growth Marketing</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section get-in-touch">
+                <h3>Get In Touch</h3>
+                <ul>
+                    <li><a href="mailto:Ecomlaunchpro@gmail.com">Ecomlaunchpro@gmail.com</a></li>
+                    <li><a href="https://wa.me/919211870426">+91 92118 70426</a></li>
+                    <li><a href="tel:+919211870426">+91 92118 70426</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 EcomLaunch Pro. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919211870426" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        menuOverlay.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
